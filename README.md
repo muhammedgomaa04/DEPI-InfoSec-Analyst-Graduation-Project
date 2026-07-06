@@ -1,62 +1,276 @@
-# End-to-End Vulnerability Management System (VMS) Workflow
+# End-to-End Vulnerability Management Using Nessus Essentials🛡️ 
 
-## 📌 Project Overview
-This project demonstrates the practical execution of a proactive **Vulnerability Management Lifecycle** deployed across a hybrid corporate infrastructure containing **Windows 10 Enterprise** and an **Ubuntu Linux Server**. The end-to-end workflow establishes rigorous guardrails across asset discovery, credentialed vs. uncredentialed vulnerability scanning, metric-based risk prioritization ($CVSSv3$), technical patch remediation, and strategic compensating controls for End-of-Life ($EOL$) architecture.
+<p align="center">
+  <img src="screenshots/banner.png" alt="Project Banner" width="100%">
+</p>
+
+<p align="center">
+
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-blue)
+![Scanner](https://img.shields.io/badge/Scanner-Nessus%20Essentials-success)
+![Project](https://img.shields.io/badge/Project-Vulnerability%20Management-orange)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
+</p>
 
 ---
 
-## 📊 Executive KPI Dashboard & Comparison
-Below is the definitive technical summary illustrating the defensive actions taken and the massive reduction achieved in the infrastructure's attack surface:
+## 📌 Overview
 
-![Executive KPI Dashboard](screenshots/13_KPI_Dashboard.png)
+This project demonstrates a complete **End-to-End Vulnerability Management Lifecycle** in a simulated enterprise environment using **Nessus Essentials**.
 
-### Core Performance Metrics:
-* **Ubuntu Server Remediation Success:** Achieved a **100% mitigation rate**, entirely neutralizing all **58 high-risk and mixed flaws**.
-* **Windows 10 Risk Reduction:** Secured an **80% overall risk mitigation**. The third-party application layer was completely sanitized, leaving only residual OS-level risks.
-* **Service Level Objective (SLO) Status:** Maintained a **98% compliance rate** for resolving high-severity exposure vectors within targeted deployment timelines.
+Instead of performing only vulnerability scanning, this project follows the complete security workflow used in real organizations:
+
+- Asset Discovery
+- Vulnerability Assessment
+- Risk Prioritization
+- Remediation
+- Verification Scanning
+- Executive Reporting
+- KPI Dashboard
+
+The lab simulates an enterprise environment containing Windows and Linux systems connected inside a private network.
 
 ---
 
-## 🛠️ Project Phases & Engineering Breakthroughs
+# 📑 Table of Contents
 
-### 📅 Phase 1: Asset Discovery & Scoping
-Initiated a network-layer discovery ping sweep (`PROJ3_Asset_Discovery_Scan`) to map active infrastructure nodes, identify open listening ports, and establish a strict assessment perimeter.
+- Overview
+- Project Objectives
+- Lab Environment
+- Network Topology
+- Project Workflow
+- Technologies Used
+- Project Structure
+- Screenshots
+- Results
+- Executive Dashboard
+- Documentation
+- Future Improvements
+- Contributors
 
-* **Target Subnet N Range:** `192.168.213.0/24`
-* **Discovered Inventory Constraints:**
-  * **Asset 1:** Windows 10 Host (`192.168.213.132`) — Internal Corporate Workstation
-  * **Asset 2:** Ubuntu Linux Server (`192.168.213.128`) — Production Environment Asset
+---
 
-### 📅 Phase 2: Vulnerability Assessment & CVSS Analysis
-To rigorously validate the necessity of deeper inspection visibility, two distinct auditing methodologies were launched via **Nessus**:
+# 🎯 Project Objectives
 
-1. **Unauthenticated Scan Baseline:** Simulated a perimeter-breaching external adversary. Yielded only **30 superficial vulnerabilities** (exposing a massive blind spot regarding internal system binaries).
-2. **Authenticated Scan (Credentialed Audit):** Provided the scanner with local administrative and SSH/sudo escalation access to query deep file registries.
-   * **Windows 10 Findings:** Risk exposure skyrocketed to **55 Vulnerabilities**, uncovering critical remote code execution ($RCE$) avenues within *Adobe Reader*, *7-Zip*, and core operating system libraries.
-   * **Ubuntu Server Findings:** Discovered **58 Vulnerabilities**, identifying critical flaws within *Splunk Enterprise (CVSS 7.5)*, *PostgreSQL*, and *Apache HTTP Server*.
+The main objectives of this project are:
 
-### 📅 Phase 3: Remediation & Systems Hardening
-Applied context-specific defensive countermeasures to eradicate discovered risks and minimize the corporate attack surface:
+- Build a realistic Enterprise Home Lab
+- Discover network assets
+- Perform Credentialed and Unauthenticated Vulnerability Scans
+- Identify security weaknesses
+- Prioritize vulnerabilities using CVSS
+- Apply remediation actions
+- Verify remediation effectiveness
+- Measure security improvement
+- Produce executive-level reports
 
-* **Ubuntu Linux Hardening:**
-  * Purged the high-risk, unutilized monitoring tool (`Splunk Enterprise`) to eliminate its threat vector entirely.
-  * Executed comprehensive package repository updates (`sudo apt update && sudo apt upgrade -y`) to patch PostgreSQL and Apache dependencies.
-  * Deployed the Uncomplicated Firewall (**UFW**) to drop unauthorized external packets, explicitly whitelist-restricting inbound connections to SSH (22) and HTTP (80).
-* **Windows 10 Hardening:**
-  * Uninstalled vulnerable local binaries (*Adobe Acrobat Reader*, *Microsoft Paint 3D*) via administrative PowerShell commands.
-  * Upgraded third-party file architectures (*7-Zip*) to secure, validated baselines.
-  * Enforced corporate **SMB Signing Policies** via Local Group Policy (`gpedit.msc`) to permanently negate Man-in-the-Middle ($MITM$) authentication relay exploits.
+---
 
-### 📅 Phase 4: Post-Remediation Verification & Residual Risk Handling
-Launched comprehensive compliance verification scans (`PROJ3_Post_Remediation_Windows_Audit_Scan`) to audit the modified environments:
-* **Ubuntu Server Status:** **0 High/Critical Residual Flaws** (Achieved an absolute clean-sheet status).
-* **Windows 10 Status:** Application-layer threats were entirely eliminated, though **11 High-risk OS vulnerabilities** remained.
+# 🏗️ Lab Environment
 
-#### 🧠 Defensive Architecture Strategy for EOL Operating Systems
-A root cause analysis determined that the laboratory host utilizes Windows 10 version 21H2, which has officially passed its **End-of-Life (EOL)** cycle and no longer receives downstream security KBs from Microsoft. Rather than accepting blind structural risk, we designed and deployed **Compensating Controls**:
-1. **Network Segmentation:** Isolated the vulnerable host into a separate, restricted **Secure VLAN**.
-2. **Access Control Filtering:** Configured local firewall Access Control Lists ($ACLs$) to block all arbitrary inbound traffic, entirely neutralizing the external exploitability of the underlying OS.
-3. **Long-Term Strategy:** Documented and submitted a formal migration proposal to transition corporate infrastructure assets to Windows 11.
+| Component | Description |
+|------------|------------|
+| Scanner | Kali Linux |
+| Target 1 | Windows 10 Workstation |
+| Target 2 | Ubuntu Server |
+| Scanner Tool | Nessus Essentials |
+| Network | 192.168.213.0/24 |
+
+---
+
+# 🌐 Network Topology
+
+<p align="center">
+<img src="screenshots/Lab_Diagram.png" width="900">
+</p>
+
+---
+
+# 🔄 Vulnerability Management Lifecycle
+
+The project follows the complete Vulnerability Management lifecycle:
+
+```
+Asset Discovery
+        │
+        ▼
+Vulnerability Assessment
+        │
+        ▼
+Risk Prioritization
+        │
+        ▼
+Remediation
+        │
+        ▼
+Verification Scan
+        │
+        ▼
+Executive Reporting
+```
+
+---
+
+# ⚙️ Technologies Used
+
+- Nessus Essentials
+- Kali Linux
+- Ubuntu Server
+- Windows 10
+- SSH
+- CVSS
+- PowerPoint
+- Draw.io
+
+
+---
+
+# 📸 Project Screenshots
+
+## Lab Architecture
+
+![](screenshots/01_Lab_Architecture.png)
+
+---
+
+## Asset Discovery
+
+![](screenshots/02_Asset_Discovery.png)
+
+---
+
+## Windows Vulnerability Scan
+
+![](screenshots/03_Windows_Scan.png)
+
+---
+
+## Ubuntu Vulnerability Scan
+
+![](screenshots/04_Ubuntu_Scan.png)
+
+---
+
+## Windows Findings
+
+![](screenshots/05_Windows_Vulnerabilities.png)
+
+---
+
+## Ubuntu Findings
+
+![](screenshots/06_Ubuntu_Vulnerabilities.png)
+
+---
+
+## Credentialed Scan
+
+![](screenshots/07_Credentialed_Scan.png)
+
+---
+
+## Ubuntu Remediation
+
+![](screenshots/08_Ubuntu_Remediation.png)
+
+---
+
+## Windows Remediation
+
+![](screenshots/09_Windows_Remediation.png)
+
+---
+
+## Ubunto Verification Scan
+
+![](screenshots/10_Ubunto_Verification_Scan.png)
+
+---
+## Windows Verification Scan
+
+![](screenshots/11_Windows_Verification_Scan.png)
+
+---
+
+## Before vs After Comparison
+
+![](screenshots/12_Before_After.png)
+
+---
+
+## Executive KPI Dashboard
+
+![](screenshots/13_KPI_Dashboard.png)
+
+---
+
+# 📊 Key Results
+
+✔ Successfully discovered all network assets
+
+✔ Performed Credentialed Vulnerability Assessment
+
+✔ Identified High, Medium, and Low vulnerabilities
+
+✔ Prioritized risks using CVSS
+
+✔ Applied remediation actions
+
+✔ Reduced overall security risks
+
+✔ Verified remediation using rescanning
+
+✔ Produced Executive KPI Dashboard
+
+✔ Generated complete technical documentation
+
+---
+
+# 📈 Executive Dashboard
+
+The project includes an executive dashboard summarizing:
+
+- Assets Assessed
+- Credentialed Scans
+- High Risk Reduction
+- Medium Risk Reduction
+- Verification Success
+- Overall Security Improvement
+
+---
+
+# 📄 Documentation
+
+The repository includes:
+
+- Full Project Documentation
+- Final Presentation
+- Network Diagram
+- Screenshots
+- Executive KPI Dashboard
+
+---
+
+# 🚀 Future Improvements
+
+Possible future enhancements include:
+
+- SIEM Integration (Splunk)
+- Patch Management Automation
+- Continuous Monitoring
+- Scheduled Vulnerability Scans
+- Vulnerability Trend Analysis
+- Multi-Subnet Assessment
+- Integration with Ticketing Systems
+
+
+---
+
+# 🎓 Academic Project
+
+This project was developed for educational purposes to demonstrate practical implementation of enterprise Vulnerability Management concepts.
 
 ---
 
